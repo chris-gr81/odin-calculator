@@ -27,7 +27,8 @@ body {
     border-radius: 20px;
     padding: 20px;
     width: 350px;
-    height: 550px;
+    height: auto;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,21 +60,36 @@ body {
         1px 1px 0 #777,
         2px 2px 5px rgba(0, 0, 0, 0.3);
     letter-spacing: 1px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 #display {
     background-color: #1e1e1e;
     color: #FFFFFF;
     width: 100%;
-    height: 60px;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
     padding: 10px;
     font-size: 2em;
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.5);
+    min-height: 100px;
+}
+#display-history {
+    font-size: 0.5em;
+    color: #909090;
+    text-align: right;
+    min-height: 20px;
+}
+#display-working {
+    font-size: 1.6em;
+    color: #FFFFFF;
+    text-align: right;
+    flex-grow: 1;
 }
 
 #keyboard {

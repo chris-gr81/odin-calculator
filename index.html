@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="logic.js" defer></script>
     <title>Odin-Calculator</title>
 </head>
 <body>
@@ -13,13 +14,14 @@
                 <h2>Odin Calculator</h2>
             </div>
             <div id="display">
-                0
+                <div id="display-history">history</div>
+                <div id="display-working">0</div>
             </div>
             <div id="keyboard">
                 <button id="key7" class="numberKey">7</button>
                 <button id="key8" class="numberKey">8</button>
                 <button id="key9" class="numberKey">9</button>
-                <button id="keyDel" class="functionKey">DEL</button>
+                <button id="keyClear" class="functionKey">clear</button>
                 <button id="key4" class="numberKey">4</button>
                 <button id="key5" class="numberKey">5</button>
                 <button id="key6" class="numberKey">6</button>

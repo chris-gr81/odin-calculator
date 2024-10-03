@@ -14,30 +14,42 @@ function divide (a, b) {
     return a / b;
 }
 
-function operate (firstNumber, secondNumber, operator) {
+function operate (cacheNumber, workingNumber, operator) {
     let result = ""
     switch (operator) {
         case "+":
-            result = add (firstNumber, secondNumber);
+            result = add (cacheNumber, workingNumber);
             break;
         case "-":
-            result = substract (firstNumber, secondNumber);
+            result = substract (cacheNumber, workingNumber);
             break;
         case "*":
-            result = multiply (firstNumber, secondNumber);
+            result = multiply (cacheNumber, workingNumber);
             break;
         case "/":
-            result = divide (firstNumber, secondNumber);
+            result = divide (cacheNumber, workingNumber);
             break;
     }
     return result;
 }
 
-let firstNumber = ""; 
-let secondNumber = ""; 
+function getInput(inpVal, keyType) {
+    workingNumber += inpVal;
+    displayWork.innerText = workingNumber;
+}
+let cacheNumber = ""; 
+let workingNumber = ""; 
 let operator = "";
 
-console.log(operate(5, 9, "/"));
+let displayWork = document.querySelector("#display-working");
+let numberKeys = document.querySelectorAll(".numberKey");
+
+numberKeys.forEach((numberKey) => {
+    numberKey.addEventListener(
+        "click", () => getInput(numberKey.innerText, "number"))
+})
+
+console.log(display.innerText)
 // console.log(substract(a, b));
 // console.log(mulitply(a, b));
 // console.log(divide(a, b));
