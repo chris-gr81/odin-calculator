@@ -116,7 +116,7 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); 
 }
 
-.functionKey {
+.operatorKey {
     background-color: #FF9500;
     color: #FFFFFF;
     width: 70px;
@@ -138,7 +138,7 @@ body {
     background-color: #707070;
 }
 
-.functionKey:active {
+.operatorKey:active {
     background-color: #FFB14D;
 }
 
