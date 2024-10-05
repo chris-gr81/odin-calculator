@@ -86,10 +86,35 @@ function mainProcess(inpVal) {
     console.log(cval);
 }
 
+function serviceHandling(inpVal) {
+    switch (inpVal) {
+        case "clear": 
+            resetCalc();
+            break;
+        case "=":
+            console.log(inpVal);
+            break;
+    }
+}
+
+function resetCalc() {
+    cval.state = 0;
+    cval.number1 = "";
+    cval.number2 = "";
+    cval.operator = "",
+    cval.disMain = "",
+    cval.disUpper = "",
+    cval.firstRound = true,
+    printDisplay();
+}
+
 function printDisplay() {
     displayWork.innerText = cval.disMain;
     displayHistory.innerText = cval.disUpper;
 }
+
+
+// Starting point "main"--------------------------------------------------------------
 
 // declaring objects and globals
 const cval = {
@@ -108,6 +133,7 @@ const displayWork = document.querySelector("#display-working");
 const displayHistory = document.querySelector("#display-history");
 const numberKeys = document.querySelectorAll(".numberKey");
 const operatorKeys = document.querySelectorAll(".operatorKey");
+const serviceKeys = document.querySelectorAll(".serviceKey");
 
 const arithmetics = ["+", "-", "*", "/", "="];
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -120,6 +146,12 @@ numberKeys.forEach((numberKey) => {
 operatorKeys.forEach((operatorKey) => {
     operatorKey.addEventListener("click", () =>
         mainProcess(operatorKey.innerText)
+    );
+});
+
+serviceKeys.forEach((serviceKey) => {
+    serviceKey.addEventListener("click", () =>
+        serviceHandling(serviceKey.innerText)
     );
 });
 
