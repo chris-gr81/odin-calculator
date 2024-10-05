@@ -11,6 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (b === "0") return "Div 0 Error"; 
     return Number(a) / Number(b);
 }
 
@@ -46,10 +47,9 @@ function mainProcess(inpVal) {
                 console.log(cval)
                 printDisplay();
             } else {
+                // forbit operator as very first input
                 return;
             }
-            // forbit operator as very fist input
-            return null;
         } else if (arithmetics.includes(inpVal) && cval.number1 != "") {
             cval.state = 1;
             cval.operator = inpVal;
