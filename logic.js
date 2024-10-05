@@ -36,6 +36,12 @@ function operate(number1, number2, operator) {
 }
 
 function mainProcess(inpVal) {
+    if (cval.disMain === "Div 0 Error") {
+        console.log("huhu")
+        resetCalc();
+        printDisplay();
+    }
+
     if (cval.state === 0) {
         if (arithmetics.includes(inpVal) && cval.number1 === "") {
             // if coming from equal
@@ -99,11 +105,14 @@ function mainProcess(inpVal) {
 
 function serviceHandling(inpVal) {
     switch (inpVal) {
-        case "clear": 
+        case "C": 
             resetCalc();
             break;
         case "=":
             equalStop();
+            break;
+        case "CE":
+            resetDisMain();
             break;
     }
 }

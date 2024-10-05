@@ -116,7 +116,7 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); 
 }
 
-.operatorKey, .serviceKey {
+.operatorKey {
     background-color: #FF9500;
     color: #FFFFFF;
     width: 70px;
@@ -133,13 +133,41 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+.serviceKey {
+    background-color: #d3d3d3;
+    color: #333333;
+    width: 70px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    flex: 1 1 calc(25% - 10px);
+    max-width: 70px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#key0 {
+    min-width: calc(2 * 70px + 1 * 10px);
+}
+
+#keyEqual {
+    height: 70px;
+}
+
 .numberKey:active, .operatorKey:active, .serviceKey:active {
     transform: scale(0.95);
     background-color: #707070;
 }
 
-.operatorKey:active, .serviceKey:active {
+.operatorKey:active {
     background-color: #FFB14D;
+}
+.serviceKey:active {
+    background-color: #A9a9a9;
 }
 
 #app-foot p {
