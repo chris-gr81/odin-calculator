@@ -36,7 +36,6 @@ function operate (number1, number2, operator) {
 
 
 function mainProcess(inpVal) {
-
     if(cval.state === 0) {
         if(arithmetics.includes(inpVal) && cval.number1 === "") { 
             // forbit operator as very fist input
@@ -52,21 +51,37 @@ function mainProcess(inpVal) {
     }
 
     if(cval.state === 1) {
-        cval.disUpper = cval.number1;
+        if (cval.firstRound)
+            cval.disUpper = cval.number1;
         if(numbers.includes(inpVal)) {
             cval.state = 2;
-            cval.number2 += inpVal;
-        } else {
+        } else { // if arithmetics
             cval.operator = inpVal;      
         }
-        cval.disUpper = `${cval.number1} ${cval.operator}`
+        console.log(cval.firstRound)
+        if (cval.firstRound === true) {
+            cval.disUpper = `${cval.number1} ${cval.operator}`;
+        } else {
+            cval.disUpper = `${cval.disUpper.slice(0, -1)} ${cval.operator}` 
+        }
+        
         printDisplay();
     }   
     
     if(cval.state === 2) {
+        cval.firstRound = false;
         if(arithmetics.includes(inpVal)) {
-            console.log("wuff")
+            cval.number1 = operate(cval.number1, cval.number2, cval.operator)
+            cval.operator = inpVal;
+            cval.disUpper += ` ${cval.number2} ${cval.operator}`
+            cval.disMain = cval.number1;
+            cval.number2 = "";
+            cval.state = 1;
+        } else if(numbers.includes(inpVal)) {
+            cval.number2 += inpVal;
+            cval.disMain = cval.number2;
         }
+        printDisplay();
         
     }
     
@@ -89,7 +104,7 @@ const cval = {
     operator: "",
     disMain: "",
     disUpper: "",
-    
+    firstRound: true,
 }
 
 let expression = "";
@@ -105,13 +120,13 @@ const special = ["clear"];
 
 numberKeys.forEach((numberKey) => {
     numberKey.addEventListener(
-        "click", () => mainProcess(numberKey.innerText, cval.state)
+        "click", () => mainProcess(numberKey.innerText)
     );
 });
 
 operatorKeys.forEach((operatorKey) => {
     operatorKey.addEventListener(
-        "click", () => mainProcess(operatorKey.innerText, cval.state)
+        "click", () => mainProcess(operatorKey.innerText)
     );
 });
 
