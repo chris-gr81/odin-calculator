@@ -37,6 +37,17 @@ function operate(number1, number2, operator) {
 function mainProcess(inpVal) {
     if (cval.state === 0) {
         if (arithmetics.includes(inpVal) && cval.number1 === "") {
+            // if coming from equal
+            if (cval.disMain != "") {
+                cval.disUpper += ` ${inpVal}`
+                cval.number1 = cval.disMain;
+                cval.state = 1;
+                cval.operator = inpVal;
+                console.log(cval)
+                printDisplay();
+            } else {
+                return;
+            }
             // forbit operator as very fist input
             return null;
         } else if (arithmetics.includes(inpVal) && cval.number1 != "") {
@@ -92,7 +103,7 @@ function serviceHandling(inpVal) {
             resetCalc();
             break;
         case "=":
-            console.log(inpVal);
+            equalStop();
             break;
     }
 }
@@ -106,6 +117,21 @@ function resetCalc() {
     cval.disUpper = "",
     cval.firstRound = true,
     printDisplay();
+}
+
+function equalStop() {
+    if (cval.state === 2 && cval.number2 !== "") {
+        cval.number1 = operate(cval.number1, cval.number2, cval.operator);
+        cval.disMain = cval.number1;
+        cval.disUpper = cval.number1;
+        cval.number1 = "";
+        cval.number2 = "";
+        cval.operator = "";
+        cval.state = 0;
+        cval.firstRound = true;
+        printDisplay();
+    }
+    console.log(cval)
 }
 
 function printDisplay() {
