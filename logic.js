@@ -114,27 +114,57 @@ function serviceHandling(inpVal) {
             resetDisMain();
             break;
         case "+/-":
-            togglePM();
+            manipulateNumber("-1");
+            break;
+        case ".":
+            manipulateNumber(".");
             break;
     }
 }
 
-function togglePM() {
+function manipulateNumber(modus) {
     if (cval.state === 0) {
         if (cval.disUpper != "") {
-            cval.number1 = operate(cval.disMain, "-1", "*");
+            switch (modus) {
+                case "-1":
+                    cval.number1 = operate(cval.disMain, modus, "*");
+                    break;
+                case ".":
+                    if(!isFloated(cval.disMain)) cval.number1 += cval.disMain + modus;
+                    break;
+            }
             cval.disMain = cval.number1;
         } else {
-            cval.number1 = operate(cval.number1, "-1", "*");
+            switch (modus) {
+                case "-1":
+                    cval.number1 = operate(cval.number1, modus, "*");
+                    break;
+                case ".":
+                    if(!isFloated(cval.number1)) cval.number1 += modus;
+                    break;
+            }  
             cval.disMain = cval.number1;
         }
     }
     if (cval.state === 2) {
-        cval.number2 = operate(cval.number2, "-1", "*");
+        switch (modus) {
+            case "-1":
+                cval.number2 = operate(cval.number2, "-1", "*");
+                break;
+            case ".":
+                if(!isFloated(cval.number2)) cval.number2 += modus;
+                break;
+        }
+        
         cval.disMain = cval.number2;
     }
     printDisplay();
 }
+
+function isFloated(a) {
+    return String(a).includes(".");
+}
+
 function resetDisMain() {
     if (cval.state === 0) {
         cval.number1 = "";
