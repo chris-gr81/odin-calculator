@@ -230,9 +230,9 @@ const numberKeys = document.querySelectorAll(".numberKey");
 const operatorKeys = document.querySelectorAll(".operatorKey");
 const serviceKeys = document.querySelectorAll(".serviceKey");
 
-const arithmetics = ["+", "-", "*", "/", "="];
+const arithmetics = ["+", "-", "*", "/"];
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-const special = ["clear"];
+const service = ["Escape", "Backspace", "=", "Enter", ".", "F9"];
 
 numberKeys.forEach((numberKey) => {
     numberKey.addEventListener("click", () => mainProcess(numberKey.innerText));
@@ -249,6 +249,33 @@ serviceKeys.forEach((serviceKey) => {
         serviceHandling(serviceKey.innerText)
     );
 });
+
+// keyboard-support
+document.addEventListener("keydown", (e) => {
+    numbers.includes(e.key) && mainProcess(e.key);
+    arithmetics.includes(e.key) && mainProcess(e.key);
+    if (service.includes(e.key)) {
+        switch (e.key)  {
+            case "Enter":
+            case "=":
+                serviceHandling("="); 
+                break;
+            case "Escape":
+                serviceHandling("C");
+                break;
+            case "Backspace":
+                serviceHandling("CE");
+                break;
+            case ".":
+                serviceHandling(".");
+                break;
+            case "F9":
+                serviceHandling("+/-");
+                break;      
+        }
+    }
+    console.log(e.key)
+})
 
 // initialize display
 printDisplay(cval.disMain, cval.disUpper);
