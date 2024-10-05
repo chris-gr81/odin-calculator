@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === "0") return "Div 0 Error"; 
+    if (b === "0") return "Div 0 Error";
     return Number(a) / Number(b);
 }
 
@@ -37,7 +37,7 @@ function operate(number1, number2, operator) {
 
 function mainProcess(inpVal) {
     if (cval.disMain === "Div 0 Error") {
-        console.log("huhu")
+        console.log("huhu");
         resetCalc();
         printDisplay();
     }
@@ -46,7 +46,7 @@ function mainProcess(inpVal) {
         if (arithmetics.includes(inpVal) && cval.number1 === "") {
             // if coming from equal
             if (cval.disMain != "") {
-                cval.disUpper += ` ${inpVal}`
+                cval.disUpper += ` ${inpVal}`;
                 cval.number1 = cval.disMain;
                 cval.state = 1;
                 cval.operator = inpVal;
@@ -104,7 +104,7 @@ function mainProcess(inpVal) {
 
 function serviceHandling(inpVal) {
     switch (inpVal) {
-        case "C": 
+        case "C":
             resetCalc();
             break;
         case "=":
@@ -113,36 +113,50 @@ function serviceHandling(inpVal) {
         case "CE":
             resetDisMain();
             break;
+        case "+/-":
+            togglePM();
+            break;
     }
 }
 
+function togglePM() {
+    if (cval.state === 0) {
+        if (cval.disUpper != "") {
+            cval.number1 = operate(cval.disMain, "-1", "*");
+            cval.disMain = cval.number1;
+        } else {
+            cval.number1 = operate(cval.number1, "-1", "*");
+            cval.disMain = cval.number1;
+        }
+    }
+    if (cval.state === 2) {
+        cval.number2 = operate(cval.number2, "-1", "*");
+        cval.disMain = cval.number2;
+    }
+    printDisplay();
+}
 function resetDisMain() {
     if (cval.state === 0) {
         cval.number1 = "";
         cval.disMain = "";
         cval.disUpper = "";
-        console.log(cval) 
-
     } else if (cval.state === 2) {
         cval.number2 = "";
         cval.state = 1;
         cval.disMain = "";
-        console.log(cval) 
     }
-
-    // cval.disMain = "";
-    
     printDisplay();
 }
+
 function resetCalc() {
     cval.state = 0;
     cval.number1 = "";
     cval.number2 = "";
-    cval.operator = "",
-    cval.disMain = "",
-    cval.disUpper = "",
-    cval.firstRound = true,
-    printDisplay();
+    (cval.operator = ""),
+        (cval.disMain = ""),
+        (cval.disUpper = ""),
+        (cval.firstRound = true),
+        printDisplay();
 }
 
 function equalStop() {
@@ -157,14 +171,13 @@ function equalStop() {
         cval.firstRound = true;
         printDisplay();
     }
-    console.log(cval)
+    console.log(cval);
 }
 
 function printDisplay() {
     displayWork.innerText = cval.disMain;
     displayHistory.innerText = cval.disUpper;
 }
-
 
 // Starting point "main"--------------------------------------------------------------
 
