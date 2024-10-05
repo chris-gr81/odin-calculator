@@ -50,7 +50,6 @@ function mainProcess(inpVal) {
                 cval.number1 = cval.disMain;
                 cval.state = 1;
                 cval.operator = inpVal;
-                console.log(cval)
                 printDisplay();
             } else {
                 // forbit operator as very first input
@@ -117,6 +116,24 @@ function serviceHandling(inpVal) {
     }
 }
 
+function resetDisMain() {
+    if (cval.state === 0) {
+        cval.number1 = "";
+        cval.disMain = "";
+        cval.disUpper = "";
+        console.log(cval) 
+
+    } else if (cval.state === 2) {
+        cval.number2 = "";
+        cval.state = 1;
+        cval.disMain = "";
+        console.log(cval) 
+    }
+
+    // cval.disMain = "";
+    
+    printDisplay();
+}
 function resetCalc() {
     cval.state = 0;
     cval.number1 = "";
