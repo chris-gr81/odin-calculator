@@ -267,9 +267,9 @@ function printDisplay() {
     const mainLength = String(cval.disMain).length;
     let sizVal = "";
     if (mainLength <= 9) sizVal = "1.6em";
-    else if (mainLength <= 14) sizVal = "0.8em";
-    else if (mainLength <= 18) sizVal = "0.6em";
-    else sizVal = "0.3em";
+    else if (mainLength <= 13) sizVal = "0.7em";
+    else if (mainLength <= 17) sizVal = "0.5em";
+    else sizVal = "0.2em";
 
     displayWork.style.fontSize = sizVal;
     displayWork.style.lineHeight = sizVal;
@@ -324,7 +324,7 @@ const cval = {
 };
 
 /** The maximum number of input characters allowed for the display. */
-const MAX_INPUT_LENGTH = 18;
+const MAX_INPUT_LENGTH = 17;
 
 /** The maximum number of characters displayed in the history area. */
 const MAX_HISTORY_LENGTH = 40;
