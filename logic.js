@@ -234,11 +234,11 @@ function resetCalc() {
     cval.state = 0;
     cval.number1 = "";
     cval.number2 = "";
-    (cval.operator = ""),
-        (cval.disMain = ""),
-        (cval.disUpper = ""),
-        (cval.firstRound = true),
-        printDisplay();
+    cval.operator = "";
+    cval.disMain = "";
+    cval.disUpper = "";
+    cval.firstRound = true;
+    printDisplay();
 }
 
 /**
@@ -266,9 +266,9 @@ function printDisplay() {
     // creating display main section
     const mainLength = String(cval.disMain).length;
     let sizVal = "";
-    if (mainLength <= 10) sizVal = "1.6em";
-    else if (mainLength <= 16) sizVal = "1.0em";
-    else if (mainLength <= 20) sizVal = "0.8em";
+    if (mainLength <= 9) sizVal = "1.6em";
+    else if (mainLength <= 15) sizVal = "1.0em";
+    else if (mainLength <= 19) sizVal = "0.8em";
     else sizVal = "0.6em";
 
     displayWork.style.fontSize = sizVal;
@@ -324,7 +324,7 @@ const cval = {
 };
 
 /** The maximum number of input characters allowed for the display. */
-const MAX_INPUT_LENGTH = 20;
+const MAX_INPUT_LENGTH = 19;
 
 /** The maximum number of characters displayed in the history area. */
 const MAX_HISTORY_LENGTH = 40;
