@@ -48,7 +48,6 @@ function divide(a, b) {
  * @return {number} The result of the operation.
  */
 function operate(number1, number2, operator) {
-    console.log(number1, number2, operator);
     let result = "";
     switch (operator) {
         case "+":
@@ -119,7 +118,6 @@ function mainProcess(inpVal) {
             // if arithmetics
             cval.operator = inpVal;
         }
-        console.log(cval.firstRound);
         if (cval.firstRound === true) {
             cval.disUpper = `${cval.number1} ${cval.operator}`;
         } else {
@@ -144,8 +142,6 @@ function mainProcess(inpVal) {
         }
         printDisplay();
     }
-
-    console.log(cval);
 }
 
 /**
@@ -204,7 +200,6 @@ function manipulateNumber(modus) {
         cval.disMain = cval.number2;
     }
     printDisplay();
-    console.log(cval);
 }
 
 /**
@@ -261,7 +256,6 @@ function equalStop() {
         cval.firstRound = true;
         printDisplay();
     }
-    console.log(cval);
 }
 
 /**
@@ -424,7 +418,6 @@ document.addEventListener("keydown", (e) => {
                 break;
         }
     }
-    console.log(e.key);
 });
 
 // ------------------------------- Initialize Display --------------------------------------
