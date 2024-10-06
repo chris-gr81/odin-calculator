@@ -32,14 +32,18 @@ function operate(number1, number2, operator) {
             result = divide(number1, number2);
             break;
     }
-    return result;
+    return roundIt(result);
+}
+
+function roundIt(number) {
+    let factor = Math.pow(10, ROUND_FACTOR);
+    return Math.round(number * factor) / factor;
+
 }
 
 function mainProcess(inpVal) {
-    if (cval.disMain === "Div 0 Error") {
-        console.log("huhu");
-        resetCalc();
-        printDisplay();
+    if (!passDisplayLength(cval.disMain, inpVal)) {
+        return null;
     }
 
     if (cval.state === 0) {
@@ -130,19 +134,20 @@ function manipulateNumber(modus) {
                     cval.number1 = operate(cval.disMain, modus, "*");
                     break;
                 case ".":
-                    if(!isFloated(cval.disMain)) cval.number1 += cval.disMain + modus;
+                    if (!isFloated(cval.disMain))
+                        cval.number1 = cval.disMain + modus;
                     break;
             }
-            cval.disMain = cval.number1;
+            cval.disMain = String(cval.number1);
         } else {
             switch (modus) {
                 case "-1":
                     cval.number1 = operate(cval.number1, modus, "*");
                     break;
                 case ".":
-                    if(!isFloated(cval.number1)) cval.number1 += modus;
+                    if (!isFloated(cval.number1)) cval.number1 += modus;
                     break;
-            }  
+            }
             cval.disMain = cval.number1;
         }
     }
@@ -152,13 +157,14 @@ function manipulateNumber(modus) {
                 cval.number2 = operate(cval.number2, "-1", "*");
                 break;
             case ".":
-                if(!isFloated(cval.number2)) cval.number2 += modus;
+                if (!isFloated(cval.number2)) cval.number2 += modus;
                 break;
         }
-        
+
         cval.disMain = cval.number2;
     }
     printDisplay();
+    console.log(cval);
 }
 
 function isFloated(a) {
@@ -192,8 +198,8 @@ function resetCalc() {
 function equalStop() {
     if (cval.state === 2 && cval.number2 !== "") {
         cval.number1 = operate(cval.number1, cval.number2, cval.operator);
-        cval.disMain = cval.number1;
-        cval.disUpper = cval.number1;
+        cval.disMain = String(cval.number1);
+        cval.disUpper = String(cval.number1);
         cval.number1 = "";
         cval.number2 = "";
         cval.operator = "";
@@ -205,8 +211,34 @@ function equalStop() {
 }
 
 function printDisplay() {
+    // creating display main section
+    const mainLength = String(cval.disMain).length;
+    let sizVal = "";
+    if (mainLength <= 10) sizVal = "1.6em";
+    else if (mainLength <= 16) sizVal = "1.0em";
+    else if (mainLength <= 20) sizVal = "0.8em";
+    else sizVal = "0.6em";
+
+    displayWork.style.fontSize = sizVal;
+    displayWork.style.lineHeight = sizVal;
+
     displayWork.innerText = cval.disMain;
-    displayHistory.innerText = cval.disUpper;
+
+    //creating display history section
+    const slicedUpper = String(cval.disUpper).slice(-MAX_HISTORY_LENGTH)
+    displayHistory.innerText = slicedUpper;
+}
+
+function passDisplayLength(test, inpVal) {
+    if (
+        test.length >= MAX_INPUT_LENGTH &&
+        numbers.includes(inpVal) &&
+        (cval.state === 0 || cval.state === 2)
+    ) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 // Starting point "main"--------------------------------------------------------------
@@ -223,6 +255,10 @@ const cval = {
 };
 
 let expression = "";
+
+const MAX_INPUT_LENGTH = 20;
+const MAX_HISTORY_LENGTH = 40;
+const ROUND_FACTOR = 6;
 
 const displayWork = document.querySelector("#display-working");
 const displayHistory = document.querySelector("#display-history");
@@ -255,10 +291,10 @@ document.addEventListener("keydown", (e) => {
     numbers.includes(e.key) && mainProcess(e.key);
     arithmetics.includes(e.key) && mainProcess(e.key);
     if (service.includes(e.key)) {
-        switch (e.key)  {
+        switch (e.key) {
             case "Enter":
             case "=":
-                serviceHandling("="); 
+                serviceHandling("=");
                 break;
             case "Escape":
                 serviceHandling("C");
@@ -271,11 +307,11 @@ document.addEventListener("keydown", (e) => {
                 break;
             case "F9":
                 serviceHandling("+/-");
-                break;      
+                break;
         }
     }
-    console.log(e.key)
-})
+    console.log(e.key);
+});
 
 // initialize display
 printDisplay(cval.disMain, cval.disUpper);
