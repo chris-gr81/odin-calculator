@@ -1,7 +1,7 @@
 /**
  * Adds two numbers.
  * @param {number} a - The first number.
- * @param {number} b - The second number. 
+ * @param {number} b - The second number.
  * @returns {number} The sum of a and b.
  */
 function add(a, b) {
@@ -74,7 +74,6 @@ function operate(number1, number2, operator) {
 function roundIt(number) {
     let factor = Math.pow(10, ROUND_FACTOR);
     return Math.round(number * factor) / factor;
-
 }
 
 /**
@@ -157,9 +156,9 @@ function serviceHandling(inpVal) {
 }
 
 /**
- * Manipulates the current number based on the given mode (e.g., 
+ * Manipulates the current number based on the given mode (e.g.,
  * toggle sign, add decimal point).
- * @param {string} modus - The mode to manipulate the number 
+ * @param {string} modus - The mode to manipulate the number
  * ("-1" for sign, "." for decimal).
  */
 function manipulateNumber(modus) {
@@ -268,8 +267,8 @@ function printDisplay() {
     let sizVal = "";
     if (mainLength <= 9) sizVal = "1.6em";
     else if (mainLength <= 15) sizVal = "0.9em";
-    else if (mainLength <= 19) sizVal = "0.6em";
-    else sizVal = "0.4em";
+    else if (mainLength <= 20) sizVal = "0.7em";
+    else sizVal = "0.6em";
 
     displayWork.style.fontSize = sizVal;
     displayWork.style.lineHeight = sizVal;
@@ -277,7 +276,7 @@ function printDisplay() {
     displayWork.innerText = cval.disMain;
 
     //creating display history section
-    const slicedUpper = String(cval.disUpper).slice(-MAX_HISTORY_LENGTH)
+    const slicedUpper = String(cval.disUpper).slice(-MAX_HISTORY_LENGTH);
     displayHistory.innerText = slicedUpper;
 }
 
@@ -324,7 +323,7 @@ const cval = {
 };
 
 /** The maximum number of input characters allowed for the display. */
-const MAX_INPUT_LENGTH = 17;
+const MAX_INPUT_LENGTH = 20;
 
 /** The maximum number of characters displayed in the history area. */
 const MAX_HISTORY_LENGTH = 40;
