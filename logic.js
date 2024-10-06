@@ -267,9 +267,9 @@ function printDisplay() {
     const mainLength = String(cval.disMain).length;
     let sizVal = "";
     if (mainLength <= 9) sizVal = "1.6em";
-    else if (mainLength <= 15) sizVal = "1.0em";
-    else if (mainLength <= 19) sizVal = "0.8em";
-    else sizVal = "0.6em";
+    else if (mainLength <= 15) sizVal = "0.9em";
+    else if (mainLength <= 19) sizVal = "0.7em";
+    else sizVal = "0.5em";
 
     displayWork.style.fontSize = sizVal;
     displayWork.style.lineHeight = sizVal;
